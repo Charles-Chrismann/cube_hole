@@ -1,0 +1,184 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0);
+    width: 50%;
+    transform: rotateX(45deg) rotateZ(45deg);
+    animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+    0%{
+        transform: rotateX(45deg) rotateZ(45deg)
+    }
+    100%{
+        transform: rotateX(405deg) rotateZ(405deg)
+    }
+}
+
+.container::after{
+    display: block;
+    content: '';
+    padding-bottom: 100%;
+}
+
+.cube{
+    /* background-color: blue; */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.face{
+    /* / background-color: crimson; / */
+    display: grid;
+    grid-template-areas: "w1 w1 w1 w1" "w1 w1 w1 w1" "w2 w2 void w4" "w2 w2 w3 w4";
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    border: solid 1px;
+}
+
+.wall:not(.void){
+    background-color: crimson;
+    animation: rainbow 4s linear infinite;
+}
+
+@keyframes rainbow {
+    0%{
+        background-color: rgb(255,0,0);
+    }
+    8%{
+        background-color: rgb(255,127,0);
+    }
+    16%{
+        background-color: rgb(255,255,0);
+    }
+    25%{
+        background-color: rgb(127,255,0);
+    }
+    33%{
+        background-color: rgb(0,255,0);
+    }
+    41%{
+        background-color: rgb(0,255,127);
+    }
+    50%{
+        background-color: rgb(0,255,255);
+    }
+    58%{
+        background-color: rgb(0,127,255);
+    }
+    66%{
+        background-color: rgb(0,0,255);
+    }
+    75%{
+        background-color: rgb(127,0,255);
+    }
+    83%{
+        background-color: rgb(255,0,255);
+    }
+    91%{
+        background-color: rgb(255,0,127);
+    }
+    100%{
+        background-color: rgb(255,0,0);
+    }
+}
+
+.wall1{
+    grid-area: w1;
+}
+
+.wall2{
+    grid-area: w2;
+}
+
+.wall3{
+    grid-area: w3;
+}
+
+.wall4{
+    grid-area: w4;
+}
+
+.void{
+    grid-area: void;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+    border: solid 1px;
+}
+
+.wall__inside{
+    /* transform: rotateY(90deg) rotatex(calc(90deg * var(--n)))  translateZ(6.25vw) translateX(25vw); */
+    height: 100%;
+    width: 50vw;
+    /* background-color: deeppink; */
+    position: absolute;
+    transform: rotateY(90deg) rotatex(calc(90deg * var(--n)))  translateX(50%) translateZ(6.25vw);
+    display: grid;
+    grid-template-areas: "w1 w1 . w2";
+    border: solid 1px;
+}
+
+.cube .top, .cube .side, .cube .bot{
+    width: 100%;
+    height: 100%;
+    /* / background-color: red; / */
+    position: absolute;
+}
+
+.sides{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* / transform: rotateX(90deg) rotateY(calc(90deg * var(--n))); /
+    / transform: rotateX(90deg); */
+}
+
+.side{
+    transform: rotateX(-90deg) rotateY(calc(90deg * var(--n))) translateZ(25vw);
+}
+
+.flip{
+    transform: rotateX(-90deg) rotateY(calc(90deg * var(--n))) translateZ(25vw) rotateZ(90deg);
+}
+
+.top{
+    transform: rotateZ(-90deg) translateZ(25vw);
+}
+
+.bot {
+    transform: rotateZ(-90deg) translateZ(-25vw);
+}
+
+.top .wall, .bot .wall{
+    /* background-color: blue; */
+}
+
+
+.top{
+    /* display: none; */
+}
+
+.top, .bot{
+    /* display: none; */
+}
+
+
+
